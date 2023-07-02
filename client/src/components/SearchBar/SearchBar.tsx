@@ -1,44 +1,57 @@
-import { Avatar, IconButton, List, ListItem, ListItemAvatar, ListItemText, TextField } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useState } from "react";
+import { IconButton, List, ListItem, ListItemText, TextField } from "@mui/material";
+import _ from "lodash";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { ChangeEvent, SetStateAction, useState } from "react";
+import './SearchBar.css';
 
-const SearchBar = () => {
-    const [wordsItems, setWordItems] = useState<string[]>([]);
+const SearchBar = ({ wordsList, setWordList }: { wordsList: string[], setWordList: React.Dispatch<React.SetStateAction<string[]>> }) => {
     const [value, setValue] = useState("");
 
-    const addWord = ()=>{
-        setWordItems(prev=>[...prev, value]);
+    const addWord = () => {
+        if (value?.trim() !== "")
+            setWordList(prev => _.uniq([...prev, value]));
+        setValue("");
+    }
+
+    const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.keyCode === 13) {
+            addWord();
+        }
+    }
+
+    const deleteWord = (word: string) => {
+        setWordList(prev => prev.filter(w => w !== word));
     }
 
     return (
-      <div className="search-bar">
-         <TextField value={value} id="standard-basic" label="Standard" variant="standard"/>
-         <button onClick={addWord}>add</button>
-         <Demo>
-            <List dense={dense}>
-              {generate(
-                <ListItem
-                  secondaryAction={
-                    <IconButton edge="end" aria-label="delete">
-                      <DeleteIcon />
-                    </IconButton>
-                  }
-                >
-                  <ListItemAvatar>
-                    <Avatar>
-                      {/* <FolderIcon /> */}
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary="Single-line item"
-                    secondary={'Secondary text'}
-                  />
-                </ListItem>,
-              )}
+        <div className="search-bar">
+            <div className='search-container'>
+                <TextField onKeyDown={onKeyPress} value={value} onChange={(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setValue(e.target.value)} id="standard-basic" label="what word are you looking for?" variant="standard" />
+                <AddCircleIcon onClick={addWord} />
+            </div>
+            <List className='list-container'>
+                {
+                    wordsList.map(word => {
+                        return <ListItem
+                            secondaryAction={
+                                <IconButton edge="end" aria-label="delete">
+                                    <DeleteIcon onClick={() => deleteWord(word)} />
+                                </IconButton>
+                            }
+                        >
+                            <ListItemText
+                                primary={word}
+                            />
+                        </ListItem>
+                    })}
             </List>
-          </Demo>
-      </div>
+        </div>
     );
-  }
-  
-  export default SearchBar;
+}
+
+export default SearchBar;
+function uniq(arg0: string[]): string[] {
+    throw new Error('Function not implemented.');
+}
+
