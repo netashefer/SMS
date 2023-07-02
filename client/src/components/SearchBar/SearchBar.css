@@ -1,0 +1,12 @@
+.list-container {}
+
+.search-bar {
+    width: 20em;
+}
+
+.search-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center
+}

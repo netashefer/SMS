@@ -1,0 +1,17 @@
+.home-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.submit-btn {
+    width: 5em;
+}
+
+.side-bar {
+    display: flex;
+    flex-direction: column;
+    width: 20em;
+    justify-content: center;
+    align-items: center;
+}
