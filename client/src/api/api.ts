@@ -20,7 +20,8 @@ export const getData = async (wordList: Record<number, string[]>, dateRange: { s
   let query = '[';
   if (_.flatMap(wordList)?.length > 0) {
     Object.values(wordList).map(list => {
-      query += `${JSON.stringify(list).toString()},`;
+      if (list.length > 0)
+        query += `${JSON.stringify(list).toString()},`;
     })
     query = query.substring(0, query.length - 1);
     query += ']';
