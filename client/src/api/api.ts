@@ -25,7 +25,6 @@ export const getData = async (wordList: Record<number, string[]>, dateRange: { s
     })
     query = query.substring(0, query.length - 1);
     query += ']';
-    query = query.replaceAll(`"`, `'`);
     url = url.concat(`?message=${query}`);
     isAdded = true;
   }
