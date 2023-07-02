@@ -1,5 +1,8 @@
 {
   "dependencies": {
-    "node-fetch": "^3.3.1"
+    "i": "^0.3.7",
+    "node-fetch": "^3.3.1",
+    "npm": "^9.7.2",
+    "react-toastify": "^9.1.3"
   }
 }

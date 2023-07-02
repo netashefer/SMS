@@ -1,5 +1,6 @@
-import './App.css';
+import { ToastContainer } from 'react-toastify';
 import HomePage from './pages/HomePage';
+import './App.css';
 
 function App() {
   return (

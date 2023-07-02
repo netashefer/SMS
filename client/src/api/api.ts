@@ -1,4 +1,7 @@
-import fetch from 'node-fetch';
+import axios from 'axios';
+import { log } from 'console';
+import { Message } from '../types/message.types';
+import { toast } from 'react-toastify';
 
 type Data = {
   chatName: string;
@@ -6,38 +9,32 @@ type Data = {
   senderPhone: string;
   message: string;
   translatedText: string;
-  photoUrl:string;
+  photoUrl: string;
   timeStamp: number;
 };
 
-const getData = async () => {
-  try {
-    // 👇️ const response: Response
-    const response = await fetch('https://localhost:5000/data', {
-      method: 'GET',
+export const getData = async (wordList: string[], dateRange: {startDate: string, endDate: string}|null) => {
+    let url = "http://localhost:5000/data";
+    let isAdded = false;
+    if (wordList?.length > 0) {
+      url = url.concat(`?message=${wordList.join(",")}`);
+      url = url.substring(0, url.length);
+      isAdded = true;
+    }
+    if (dateRange){
+      url = url.concat(`${isAdded ? '&' : '?'}from_date=${dateRange.startDate}&to_date=${dateRange.endDate}`);
+    }
+
+    const response = await axios.get<Message[]>(url, {
       headers: {
         Accept: 'application/json',
+        "Access-Control-Allow-Origin": '*'
       },
     });
-
-    if (!response.ok) {
+    
+    if ((response.status as Number) !== 200) {
       throw new Error(`Error! status: ${response.status}`);
     }
 
-    // 👇️ const result: GetUsersResponse
-    const result = (await response.json()) as Data;
-
-    console.log('result is: ', JSON.stringify(result, null, 4));
-
-    return result;
-
-  } catch (error) {
-    if (error instanceof Error) {
-      console.log('error message: ', error.message);
-      return error.message;
-    } else {
-      console.log('unexpected error: ', error);
-      return 'An unexpected error occurred';
-    }
-  };
+    return response.data;
 };
