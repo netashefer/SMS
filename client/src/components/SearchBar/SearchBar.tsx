@@ -1,16 +1,16 @@
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton, List, ListItem, ListItemText, TextField } from "@mui/material";
 import _ from "lodash";
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { ChangeEvent, SetStateAction, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import './SearchBar.css';
 
-const SearchBar = ({ wordsList, setWordList }: { wordsList: string[], setWordList: React.Dispatch<React.SetStateAction<string[]>> }) => {
+const SearchBar = ({ wordsList, setWordList }: { wordsList: string[], setWordList: (list: string[]) => void }) => {
     const [value, setValue] = useState("");
 
     const addWord = () => {
         if (value?.trim() !== "")
-            setWordList(prev => _.uniq([...prev, value]));
+            setWordList(_.uniq([...(wordsList || []), value]));
         setValue("");
     }
 
@@ -21,7 +21,7 @@ const SearchBar = ({ wordsList, setWordList }: { wordsList: string[], setWordLis
     }
 
     const deleteWord = (word: string) => {
-        setWordList(prev => prev.filter(w => w !== word));
+        setWordList(wordsList?.filter(w => w !== word) || []);
     }
 
     return (
@@ -32,8 +32,9 @@ const SearchBar = ({ wordsList, setWordList }: { wordsList: string[], setWordLis
             </div>
             <List className='list-container'>
                 {
-                    wordsList.map(word => {
+                    wordsList?.map(word => {
                         return <ListItem
+                            key={word}
                             secondaryAction={
                                 <IconButton edge="end" aria-label="delete">
                                     <DeleteIcon onClick={() => deleteWord(word)} />
@@ -51,7 +52,3 @@ const SearchBar = ({ wordsList, setWordList }: { wordsList: string[], setWordLis
 }
 
 export default SearchBar;
-function uniq(arg0: string[]): string[] {
-    throw new Error('Function not implemented.');
-}
-
