@@ -13,3 +13,15 @@
     width: 20em;
     align-items: center;
 }
+
+.messages-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    width: 20%;
+    height: 50%;
+}

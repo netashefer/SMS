@@ -9,6 +9,7 @@ import { Message } from "../types/message.types";
 import './HomePage.css';
 import TabsComp from "../components/Tabs/Tabs";
 import _ from "lodash";
+import Image from '../images/logo.jpeg';
 
 const HomePage = () => {
     const [wordsList, setWordList] = useState<Record<number, string[]>>({ 0: [] });
@@ -62,7 +63,10 @@ const HomePage = () => {
                 <SearchBar wordsList={wordsList[tab]} setWordList={handleWordListChange} />
                 <Button onClick={onSubmit} variant="contained" className="submit-btn">submit</Button>
             </div>
-            <Messages messages={allMessages} />
+            <div className="messages-section">
+                <img src={Image} className="logo" />
+                <Messages messages={allMessages} />
+            </div>
         </div>
     );
 }
