@@ -1,8 +1,6 @@
 import axios from 'axios';
-import { log } from 'console';
-import { Message } from '../types/message.types';
-import { toast } from 'react-toastify';
 import _ from 'lodash';
+import { Message } from '../types/message.types';
 
 type Data = {
   chatName: string;

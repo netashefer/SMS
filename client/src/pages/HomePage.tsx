@@ -8,6 +8,7 @@ import { formatDate } from "../helpers/date.helper";
 import { Message } from "../types/message.types";
 import './HomePage.css';
 import TabsComp from "../components/Tabs/Tabs";
+import _ from "lodash";
 
 const HomePage = () => {
     const [wordsList, setWordList] = useState<Record<number, string[]>>({ 0: [] });
@@ -36,7 +37,7 @@ const HomePage = () => {
     }
 
     const addTab = () => {
-        const index = Object.keys(wordsList).length;
+        const index = +(_.max(Object.keys(wordsList)) || 0) + 1;
         setWordList(prev => {
             prev[index] = [];
             return prev;
@@ -44,11 +45,20 @@ const HomePage = () => {
         setTab(index)
     }
 
+    const deleteTab = (tabNum: number) => {
+        setWordList(prev => {
+            delete prev[tabNum];
+            return { ...prev };
+        });
+        const index = +(_.min(Object.keys(wordsList)) || 0);
+        setTab(index)
+    }
+
     return (
         <div className="home-page">
             <div className="side-bar">
                 <DateRangePicker start={start} end={end} setStart={setStart} setEnd={setEnd} />
-                <TabsComp tab={tab} setTab={setTab} tabsLength={Object.keys(wordsList).length} addTab={addTab} />
+                <TabsComp tab={tab} setTab={setTab} tabs={Object.keys(wordsList)} addTab={addTab} deleteTab={deleteTab} />
                 <SearchBar wordsList={wordsList[tab]} setWordList={handleWordListChange} />
                 <Button onClick={onSubmit} variant="contained" className="submit-btn">submit</Button>
             </div>

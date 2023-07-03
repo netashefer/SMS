@@ -4,10 +4,11 @@ import './Tabs.css';
 import _ from 'lodash';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
-const TabsComp = ({ tab, setTab, tabsLength, addTab }: { tab: number, setTab: (num: number) => void, tabsLength: number, addTab: () => void }) => {
+const TabsComp = ({ tab, setTab, tabs, addTab, deleteTab }: { tab: number, setTab: (num: number) => void, tabs: string[], addTab: () => void, deleteTab: (tab: number) => void }) => {
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setTab(newValue);
+        event.stopPropagation();
     };
 
     return (
@@ -15,14 +16,21 @@ const TabsComp = ({ tab, setTab, tabsLength, addTab }: { tab: number, setTab: (n
             כמוסות
             <div className='tabs-container'>
                 <Tabs
-                    value={tab}
+                    value={tabs.map(t => +t).indexOf(tab)}
                     onChange={handleChange}
                     variant="scrollable"
                     scrollButtons="auto"
                     aria-label="scrollable auto tabs example"
                 >
                     {
-                        _.range(tabsLength).map(tab => <Tab label={`כמוסה ${tab + 1}`} />)
+                        tabs.map((tab, index) => <div onClick={() => deleteTab(+tab)}>
+                            {tabs.length > 1 ? "x" : null}
+                            <Tab
+                                onClick={(e) => handleChange(e, +tab)}
+                                key={+tab}
+                                label={`כמוסה ${index + 1}`}
+                            />
+                        </div>)
                     }
                 </Tabs>
                 <AddCircleOutlineIcon onClick={addTab} />

@@ -1,0 +1,39 @@
+.message-text {
+    font-size: 16px;
+    font-family: Calibri;
+    margin-bottom: 8px;
+}
+
+.original-btn {
+    margin-bottom: 8px !important;
+}
+
+.message-translated,
+.message-datetime {
+    font-size: 13px;
+    font-family: Calibri;
+    justify-content: center;
+    display: flex;
+}
+
+.message-metadata {
+    width: 50%;
+    margin-bottom: 1.5em;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.card {
+    font-family: Calibri;
+}
+
+.entities-container {
+    display: flex;
+    align-items: start;
+    justify-content: space-evenly;
+}
+
+.entity {
+    display: flex;
+    font-family: Calibri;
+}

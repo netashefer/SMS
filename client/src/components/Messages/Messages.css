@@ -1,5 +1,5 @@
 .messages-container {
-    width: 80%;
+    width: 70%;
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -15,23 +15,4 @@
 
 .card {
     width: 100%;
-}
-
-.message-text {
-    font-size: 16px;
-    font-family: Calibri;
-}
-
-.message-translated, .message-datetime {
-    font-size: 13px;
-    font-family: Calibri;
-    justify-content: center;
-    display: flex;
-}
-
-.message-metadata {
-    width: 50%;
-    margin-bottom: 1.5em;
-    display: flex;
-    justify-content: space-evenly;
 }
