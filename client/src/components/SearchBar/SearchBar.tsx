@@ -27,7 +27,15 @@ const SearchBar = ({ wordsList, setWordList }: { wordsList: string[], setWordLis
     return (
         <div className="search-bar">
             <div className='search-container'>
-                <TextField onKeyDown={onKeyPress} value={value} onChange={(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setValue(e.target.value)} id="standard-basic" label="what word are you looking for?" variant="standard" />
+                <TextField
+                    onKeyDown={onKeyPress}
+                    value={value}
+                    onChange={(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setValue(e.target.value)}
+                    id="standard-basic"
+                    label="what word are you looking for?"
+                    variant="standard"
+                    className='search-text-field'
+                />
                 <div onClick={addWord}><AddCircleIcon /></div>
             </div>
             <List className='list-container'>

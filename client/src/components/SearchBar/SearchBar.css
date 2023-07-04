@@ -3,6 +3,7 @@
 .search-bar {
     width: 20em;
     margin-top: 2em;
+    padding: 0 5px;
 }
 
 .search-container {
@@ -11,4 +12,8 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+}
+
+.search-text-field {
+    width: 80%;
 }

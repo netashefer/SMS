@@ -19,9 +19,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 .logo {
-    width: 20%;
-    height: 50%;
+    width: 15em;
+    height: 8em;
 }

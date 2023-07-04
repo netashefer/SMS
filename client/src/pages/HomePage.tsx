@@ -32,6 +32,9 @@ const HomePage = () => {
             const dateRange = startDate && endDate ? { startDate, endDate } : null;
             const result = await getData(wordsList, dateRange);
             setAllMessages(result);
+            if (!result.length) {
+                alert("There aren't results");
+            }
         } catch {
             alert("There is a problem with the server")
         }
